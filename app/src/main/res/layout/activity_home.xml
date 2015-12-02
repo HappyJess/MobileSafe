@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    tools:context="mobilesafe.lzf.com.HomeActivity">
+
+    <TextView
+        android:id="@+id/tv_home_title"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="#8866ff00"
+        android:gravity="center"
+        android:text="功能列表"
+        android:textColor="#000000"
+        android:textSize="20sp"/>
+
+    <mobilesafe.lzf.com.ui.FocusedTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:focusableInTouchMode="true"
+        android:text="最新的版本已经退出，下载送好吃的，赶快更新吧亲,这里是更多的内容哈哈~"/>
+
+    <GridView
+        android:id="@+id/gv_list_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
+        android:numColumns="3"
+        android:verticalSpacing="40dp"></GridView>
+</LinearLayout>
