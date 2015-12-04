@@ -3,6 +3,7 @@
               android:layout_width="300dp"
               android:layout_height="wrap_content"
               android:gravity="center"
+              android:background="#FFFFFF"
               android:orientation="vertical">
 
     <TextView
@@ -10,35 +11,30 @@
         android:layout_height="50dp"
         android:background="#66ff8888"
         android:gravity="center"
-        android:text="设置密码"
+        android:text="请输入密码"
         android:textColor="#000000"
         android:textSize="20sp"/>
 
     <EditText
         android:id="@+id/et_set_pwd"
-        android:inputType="textPassword"
         android:layout_width="290dp"
         android:layout_height="wrap_content"
-        android:hint="请输入密码"/>
+        android:hint="请输入密码"
+        android:inputType="textPassword"/>
 
-    <EditText
-        android:id="@+id/et_reset_pwd"
-        android:inputType="textPassword"
-        android:layout_width="290dp"
-        android:layout_height="wrap_content"
-        android:hint="请再次输入密码"/>
 
     <LinearLayout
+        android:background="#ffffff"
         android:layout_width="300dp"
-        android:gravity="center"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/submit_set_pwd"
             android:layout_width="130dp"
-            android:layout_marginRight="10dp"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:text="确定"/>
 
         <Button

@@ -6,16 +6,23 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import mobilesafe.lzf.com.utils.MD5Tools;
 
 public class HomeActivity extends Activity {
 
+    private static final String TAG = "HomeActivity";
     private GridView gv_list_home;
     private Myadapter adapter;
     private SharedPreferences sp;
@@ -90,22 +97,103 @@ public class HomeActivity extends Activity {
         }
     }
 
+    private EditText et_set_pwd;
+    private EditText et_reset_pwd;
+    private Button submit_set_pwd;
+    private Button cancle_set_pwd;
+    private AlertDialog dialog;
+
     /**
      * 设置密码对话框
      */
     private void showSetPwdDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         //自定义一个布局文件，引入布局文件
-        View view = View.inflate(HomeActivity.this,R.layout.dialog_set_pwd,null);
+        View view = View.inflate(HomeActivity.this, R.layout.dialog_set_pwd, null);
+        et_set_pwd = (EditText) view.findViewById(R.id.et_set_pwd);
+        et_reset_pwd = (EditText) view.findViewById(R.id.et_reset_pwd);
+        submit_set_pwd = (Button) view.findViewById(R.id.submit_set_pwd);
+        cancle_set_pwd = (Button) view.findViewById(R.id.cancle_set_pwd);
+        cancle_set_pwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //取消对话框
+                dialog.dismiss();
+            }
+        });
+        submit_set_pwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //取出密码并且判断
+                String password = et_set_pwd.getText().toString().trim();
+                String repassword = et_reset_pwd.getText().toString().trim();
+                if (TextUtils.isEmpty(password) || TextUtils.isEmpty(repassword)) {
+                    Toast.makeText(HomeActivity.this, "密码为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                //判断是否一致才去保存
+                if (password.equals(repassword)) {
+                    //一致的话，保存密码，把对话框消掉，还要进入手机防盗页面
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putString("password", MD5Tools.getMd5Str(password));
+                    editor.commit();
+                    dialog.dismiss();
+                    Log.i(TAG, "进入手机防盗页面");
+                    Intent intent = new Intent(HomeActivity.this,LostFindActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(HomeActivity.this, "两次密码不一致", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+        });
         builder.setView(view);
-        builder.show();
+        dialog = builder.show();
     }
 
     /**
      * 输入密码对话框
      */
     private void showEnterPwdDialog() {
-
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //自定义一个布局文件，引入布局文件
+        View view = View.inflate(HomeActivity.this, R.layout.dialog_enter_pwd, null);
+        et_set_pwd = (EditText) view.findViewById(R.id.et_set_pwd);
+        submit_set_pwd = (Button) view.findViewById(R.id.submit_set_pwd);
+        cancle_set_pwd = (Button) view.findViewById(R.id.cancle_set_pwd);
+        cancle_set_pwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //取消对话框
+                dialog.dismiss();
+            }
+        });
+        submit_set_pwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //取出密码并且判断
+                String password = et_set_pwd.getText().toString().trim();
+                String savepassword = sp.getString("password","");
+                if (TextUtils.isEmpty(password)) {
+                    Toast.makeText(HomeActivity.this, "输入的密码为空，请重新输入", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (MD5Tools.getMd5Str(password).equals(savepassword)){
+                    //输入的密码和以前设置的相同，把对话框消掉，进入主页面
+                    dialog.dismiss();
+                    Log.i(TAG,"输入的密码和以前设置的相同，把对话框消掉，进入手机页面");
+                    Intent intent = new Intent(HomeActivity.this,LostFindActivity.class);
+                    startActivity(intent);
+                }else{
+                    //不相同
+                    Toast.makeText(HomeActivity.this,"密码错误",Toast.LENGTH_SHORT).show();
+                    et_set_pwd.setText("");
+                    return;
+                }
+            }
+        });
+        builder.setView(view);
+        dialog = builder.show();
     }
 
     private boolean isSetPwd() {

@@ -52,6 +52,7 @@ public class SettingItemView extends RelativeLayout {
         desc_on = attrs.getAttributeValue("http://schemas.android.com/apk/res-auto", "desc_on");
         desc_off = attrs.getAttributeValue("http://schemas.android.com/apk/res-auto", "desc_off");
         tv_update_title.setText(titlename);
+        setDesc(desc_off);
     }
 
     public SettingItemView(Context context, AttributeSet attrs, int defStyleAttr) {
