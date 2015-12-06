@@ -32,6 +32,7 @@
             android:textColor="#000000"
             android:textSize="20sp"/>
         <TextView
+            android:id="@+id/tv_safenumber"
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,6 +61,7 @@
             android:textColor="#000000"
             android:textSize="20sp"/>
         <ImageView
+            android:id="@+id/iv_protecting"
             android:src="@drawable/unlock"
             android:layout_alignParentRight="true"
             android:layout_width="25dp"
@@ -74,6 +76,9 @@
         android:layout_height="0.2dp"/>
 
     <TextView
+        android:background="#11000000"
+        android:clickable="true"
+        android:onClick="reEnterSetup"
         android:layout_alignParentLeft="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

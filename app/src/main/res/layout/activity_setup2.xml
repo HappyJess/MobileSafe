@@ -29,6 +29,7 @@
 
 
     <mobilesafe.lzf.com.ui.SettingItemView
+        android:id="@+id/siv_setup2_bdsim"
         lzf:titlename="点击绑定SIM卡"
         lzf:desc_on="SIM卡绑定状态：开启"
         lzf:desc_off="SIM卡绑定状态：关闭"
