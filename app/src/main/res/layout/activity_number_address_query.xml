@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    tools:context="mobilesafe.lzf.com.HomeActivity">
+
+    <TextView
+        android:id="@+id/tv_home_title"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="号码归属地查询"
+        android:textColor="#000000"
+        android:textSize="20sp"/>
+    <TextView
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:drawableLeft="@android:drawable/ic_dialog_map"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="号码归属地查询"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/ed_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="phone" >
+
+    </EditText>
+
+    <Button
+        android:visibility="gone"
+        android:id="@+id/subimit_find"
+        android:onClick="numberAddressQuery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="查询" />
+
+    <TextView
+
+        android:layout_marginTop="10dp"
+        android:id="@+id/result"
+        android:gravity="center"
+        android:textColor="#ff33b5e5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text=""
+        />
+</LinearLayout>

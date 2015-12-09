@@ -20,11 +20,33 @@
         android:textSize="20sp"/>
 
     <mobilesafe.lzf.com.ui.SettingItemView
-        lzf:titlename="是否检查最新版本"
-        lzf:desc_on="自动检测最新版本状态：开启"
-        lzf:desc_off="自动检测最新版本状态：关闭"
-        android:id="@+id/id_siv_update"
+        android:id="@+id/siv_update"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></mobilesafe.lzf.com.ui.SettingItemView>
+        android:layout_height="wrap_content"
+        lzf:desc_off="自动检测最新版本状态：关闭"
+        lzf:desc_on="自动检测最新版本状态：开启"
+        lzf:titlename="是否检查最新版本"></mobilesafe.lzf.com.ui.SettingItemView>
+
+    <mobilesafe.lzf.com.ui.SettingItemView
+        android:id="@+id/siv_show_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        lzf:desc_off="来电归属地显示状态：关闭"
+        lzf:desc_on="来电归属地显示状态：开启"
+        lzf:titlename="来电归属地显示"></mobilesafe.lzf.com.ui.SettingItemView>
+
+    <mobilesafe.lzf.com.ui.SettingClickView
+        android:id="@+id/scv_changebg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </mobilesafe.lzf.com.ui.SettingClickView>
+
+    <mobilesafe.lzf.com.ui.SettingItemView
+        android:id="@+id/siv_callsms_safe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        lzf:desc_off="黑名单拦截状态：关闭"
+        lzf:desc_on="黑名单拦截状态：开启"
+        lzf:titlename="黑名单拦截设置"></mobilesafe.lzf.com.ui.SettingItemView>
 
 </LinearLayout>

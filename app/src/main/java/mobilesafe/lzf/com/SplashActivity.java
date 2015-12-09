@@ -26,8 +26,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -57,7 +59,9 @@ public class SplashActivity extends Activity {
         setContentView(R.layout.activity_splash);
         //初始化应用程序
         initialize();
-
+        copyDB("antivirus");
+        copyDB("address");
+        //copyDB("raw/antivirus.db");
         //渐变动画
         AlphaAnimation aa = new AlphaAnimation(0.2f, 1.0f);
         aa.setDuration(1000);
@@ -155,6 +159,42 @@ public class SplashActivity extends Activity {
         dialog.show();
     }
 
+
+    /**
+     * //path 把address.db这个数据库拷贝到data/data/《包名》/files/address.db
+     */
+    private void copyDB(String dbName) {
+        //只要你拷贝了一次，我就不要你再拷贝了
+        try {
+            File file = new File(getFilesDir(), dbName + ".db");
+            if (file.exists() && file.length() > 0) {
+                //正常了，就不需要拷贝了
+                Log.i(TAG, "正常了，就不需要拷贝了");
+            } else {
+                Log.i(TAG, "开始复制数据库");
+
+                file.createNewFile();
+                InputStream in;
+                if (dbName.equals("adress")) {
+                    in = this.getResources().openRawResource(R.raw.address);
+                }else{
+                    in = this.getResources().openRawResource(R.raw.antivirus);
+                }
+
+                int size = in.available();
+                byte buf[] = new byte[size];
+                in.read(buf);
+                in.close();
+                FileOutputStream out = new FileOutputStream(file);
+                out.write(buf);
+                out.close();
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * 安装apk
      */
@@ -245,12 +285,12 @@ public class SplashActivity extends Activity {
         tv_splash_version = (TextView) findViewById(R.id.tv_splash_version);
         tv_update_info = (TextView) findViewById(R.id.tv_update_info);
         tv_splash_version.setText("版本：" + getVersionName());
-        sp = getSharedPreferences("config",MODE_PRIVATE);
-        boolean update = sp.getBoolean("update",true);
-        if (update){
+        sp = getSharedPreferences("config", MODE_PRIVATE);
+        boolean update = sp.getBoolean("update", true);
+        if (update) {
             //检查升级
             checkupdate();
-        }else{
+        } else {
             //检测升级关闭，直接进入主页面
             handler.postDelayed(new Runnable() {
                 @Override

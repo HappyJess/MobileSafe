@@ -52,33 +52,42 @@ public class HomeActivity extends Activity {
         gv_list_home.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent;
                 switch (position) {
                     case 0: //进入手机防盗页面
                         showLostFindDialog();
                         break;
                     case 1:
-
+                        intent = new Intent(HomeActivity.this, CallSmsSafeActivity.class);
+                        startActivity(intent);
                         break;
                     case 2:
-
+                        intent = new Intent(HomeActivity.this,AppManagerActivity.class);
+                        startActivity(intent);
                         break;
                     case 3:
-
+                        intent = new Intent(HomeActivity.this,TaskManagerActivity.class);
+                        startActivity(intent);
                         break;
                     case 4:
-
+                        Toast.makeText(HomeActivity.this,"功能还未添加",Toast.LENGTH_SHORT).show();
+                        /*intent = new Intent(HomeActivity.this,TrafficManagerActivity.class);
+                        startActivity(intent);*/
                         break;
                     case 5:
-
+                        intent = new Intent(HomeActivity.this,AntiVirusActivity.class);
+                        startActivity(intent);
                         break;
                     case 6:
-
+                        intent = new Intent(HomeActivity.this,CleanCacheActivity.class);
+                        startActivity(intent);
                         break;
-                    case 7:
-
+                    case 7://进入高级工具
+                        intent = new Intent(HomeActivity.this, AtoolsActivity.class);
+                        startActivity(intent);
                         break;
                     case 8://进入设置中心
-                        Intent intent = new Intent(HomeActivity.this, SettingActivity.class);
+                        intent = new Intent(HomeActivity.this, SettingActivity.class);
                         startActivity(intent);
                         break;
                 }
