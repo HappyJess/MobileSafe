@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,15 +32,31 @@ public class CallSmsSafeActivity extends Activity {
     private List<BlackNumberInfo> infos;
     private BlackNumberDao dao;
     private CallSmsSafeAdapter adapter;
+    private LinearLayout ll_loading;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call_sms_safe);
         lv_callsms_safe = (ListView) findViewById(R.id.lv_callsms_safe);
-        dao = new BlackNumberDao(this);
-        infos = dao.findAll();
-        adapter = new CallSmsSafeAdapter();
-        lv_callsms_safe.setAdapter(adapter);
+        ll_loading = (LinearLayout) findViewById(R.id.ll_loading);
+        ll_loading.setVisibility(View.VISIBLE);
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                dao = new BlackNumberDao(CallSmsSafeActivity.this);
+                infos = dao.findAll();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ll_loading.setVisibility(View.INVISIBLE);
+                        adapter = new CallSmsSafeAdapter();
+                        lv_callsms_safe.setAdapter(adapter);
+                    }
+                });
+            }
+        }.start();
+
     }
 
     private class CallSmsSafeAdapter extends BaseAdapter{

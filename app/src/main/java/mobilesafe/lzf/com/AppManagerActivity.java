@@ -38,7 +38,6 @@ import android.widget.Toast;
 import mobilesafe.lzf.com.domain.AppInfo;
 import mobilesafe.lzf.com.engine.AppInfoParser;
 import mobilesafe.lzf.com.utils.DensityUtil;
-//import com.stericson.RootTools.RootTools;
 
 import java.util.ArrayList;
 import java.util.List;
